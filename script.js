@@ -1,3 +1,11 @@
+
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+}
+
+
+
+
 document.getElementById('type').addEventListener('change', function() {
     const typeDivs = ['urlDiv', 'emailDiv', 'wifiDiv', 'textDiv', 'vcardDiv', 'veventDiv', 'geoDiv', 'telDiv', 'smsDiv', 'paypalDiv'];
 
@@ -90,9 +98,27 @@ function generateQRCode() {
         qrCodeDiv.appendChild(document.createElement('br'));
         qrCodeDiv.appendChild(downloadLinkGif);
 
+        if (isMobileDevice()) {
+            const qrCodeDiv = document.getElementById('qrcode');
+            qrCodeDiv.classList.add('mobile-instructions');
+        }
+
         qrCodeDiv.scrollIntoView({
             behavior: 'smooth'
         });
+
+        if (isMobileDevice()) {
+            downloadLinkPng.onclick = mobileDownloadHandler;
+            downloadLinkJpg.onclick = mobileDownloadHandler;
+            downloadLinkGif.onclick = mobileDownloadHandler;
+        }
+
+        function mobileDownloadHandler(event) {
+            event.preventDefault();
+            alert("To save the image on mobile: \n1. Tap and hold on the image.\n2. Choose 'Add to Photos' or 'Save Image'.");
+        }
+
+
 
     };
 

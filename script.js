@@ -66,7 +66,7 @@ function generateQRCode() {
         cellSize = 10;
     }
 
-    const qr = qrcode(4, 'L');
+    const qr = qrcode(8, 'L');
     qr.addData(text);
     qr.make();
 

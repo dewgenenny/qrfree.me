@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>QR Code Generator</title>
 
@@ -26,6 +28,53 @@
     gtag('config', 'G-ZP41G8WE17');
 </script>
 <style>
+
+    /* General styles for mobile-friendliness */
+
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    input, select, textarea, button {
+        max-width: 100%;
+    }
+
+    /* Media Query for small devices like phones */
+    @media only screen and (max-width: 600px) {
+        body {
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        .support {
+            font-size: 1em;
+        }
+    }
+
+    /* Media Query for medium-sized devices like tablets */
+    @media only screen and (min-width: 601px) and (max-width: 900px) {
+        body {
+            padding: 30px;
+            font-size: 1em;
+        }
+
+        h2 {
+            font-size: 2em;
+        }
+
+        .support {
+            font-size: 1.1em;
+        }
+    }
+
+
+
+
     body {
         font-family: 'Arial', sans-serif;
         background-color: #f7f9fc;

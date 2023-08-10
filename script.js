@@ -89,7 +89,13 @@ function generateQRCode() {
         qrCodeDiv.appendChild(downloadLinkJpg);
         qrCodeDiv.appendChild(document.createElement('br'));
         qrCodeDiv.appendChild(downloadLinkGif);
+
+        qrCodeDiv.scrollIntoView({
+            behavior: 'smooth'
+        });
+
     };
+
 }
 
 function createDownloadLink(url, text, filename) {

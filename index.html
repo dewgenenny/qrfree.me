@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code Generator</title>
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+
+</head>
+<body>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f9fc;
+        color: #333;
+        padding: 40px;
+    }
+
+    h2 {
+        color: #4a90e2;  /* Dominant color */
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    select, input[type="text"], input[type="tel"], input[type="email"], input[type="url"], input[type="number"], input[type="datetime-local"], textarea {
+        width: 100%;
+        padding: 10px 15px;
+        margin-bottom: 20px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    button {
+        background-color: #4a90e2; /* Dominant color */
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: 0.3s ease-in-out;
+    }
+
+    button:hover {
+        background-color: #357ab7;  /* Darkened dominant color */
+    }
+
+    #qrcode img {
+        margin-top: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+    }
+
+    #qrcode a {
+        display: inline-block;
+        margin-right: 10px;
+        margin-top: 10px;
+        background-color: #4a90e2;
+        color: #ffffff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s ease-in-out;
+    }
+
+    #qrcode a:hover {
+        background-color: #357ab7;
+    }
+
+    .support {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 1.1em;
+    }
+
+    .support a {
+        color: #FF813F;  /* "Buy Me a Coffee" brand color */
+        text-decoration: none;
+        border-bottom: 2px dashed #FF813F;
+        transition: 0.3s ease-in-out;
+    }
+
+    .support a:hover {
+        color: #FFA072;
+        border-bottom-color: #FFA072;
+
+</style>
+
+
+
+
+
+
+<h2>QR Code Generator</h2>
+<p>Welcome to our QR code generator! In a world where simple tools often come with a price tag, we believe that basic functionalities like generating a QR code should be accessible and free for everyone. Our mission is to keep it simple, efficient, and most importantly, free of charge. Dive in and create your own QR code now!</p>
+
+<label for="type">Select QR Code Type:</label>
+<select id="type">
+    <option value="url">Web URL</option>
+    <option value="email">Email Address</option>
+    <option value="wifi">WiFi Network</option>
+    <option value="text">Text</option>
+    <option value="vcard">Contact Information (vCard)</option>
+    <option value="vevent">Event Details (vEvent)</option>
+    <option value="geo">Geolocation</option>
+    <option value="tel">Phone Number</option>
+    <option value="sms">SMS</option>
+    <option value="paypal">PayPal Payment</option>
+</select>
+
+
+<div id="urlDiv">
+    <label for="url">Web URL:</label>
+    <input type="url" id="url" placeholder="https://example.com">
+</div>
+
+<div id="emailDiv" style="display: none;">
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" placeholder="example@example.com">
+</div>
+
+<div id="wifiDiv" style="display: none;">
+    <label for="ssid">SSID:</label>
+    <input type="text" id="ssid" placeholder="Network Name">
+    <label for="password">Password:</label>
+    <input type="text" id="password" placeholder="Network Password">
+    <label for="encryption">Encryption:</label>
+    <select id="encryption">
+        <option value="WPA">WPA/WPA2</option>
+        <option value="WEP">WEP</option>
+        <option value="none">None</option>
+    </select>
+</div>
+
+<!-- ... existing divs ... -->
+
+<div id="textDiv" style="display: none;">
+    <label for="text">Text:</label>
+    <textarea id="text"></textarea>
+</div>
+
+<div id="vcardDiv" style="display: none;">
+    <label for="vcardName">Full Name:</label>
+    <input type="text" id="vcardName">
+    <label for="vcardTel">Phone Number:</label>
+    <input type="tel" id="vcardTel">
+    <label for="vcardEmail">Email:</label>
+    <input type="email" id="vcardEmail">
+    <label for="vcardAddress">Address:</label>
+    <input type="text" id="vcardAddress">
+    <label for="vcardOrg">Organization:</label>
+    <input type="text" id="vcardOrg">
+    <label for="vcardTitle">Job Title:</label>
+    <input type="text" id="vcardTitle">
+    <label for="vcardURL">Website:</label>
+    <input type="url" id="vcardURL">
+</div>
+
+<div id="veventDiv" style="display: none;">
+    <label for="veventSummary">Event Name:</label>
+    <input type="text" id="veventSummary">
+    <label for="veventStart">Start Date & Time:</label>
+    <input type="datetime-local" id="veventStart">
+    <label for="veventEnd">End Date & Time:</label>
+    <input type="datetime-local" id="veventEnd">
+    <label for="veventLocation">Location:</label>
+    <input type="text" id="veventLocation">
+    <label for="veventDescription">Description:</label>
+    <textarea id="veventDescription"></textarea>
+</div>
+
+<div id="geoDiv" style="display: none;">
+    <label for="geoLat">Latitude:</label>
+    <input type="number" step="any" id="geoLat">
+    <label for="geoLon">Longitude:</label>
+    <input type="number" step="any" id="geoLon">
+</div>
+
+<div id="telDiv" style="display: none;">
+    <label for="tel">Phone Number:</label>
+    <input type="tel" id="tel">
+</div>
+
+<div id="smsDiv" style="display: none;">
+    <label for="smsTel">Phone Number:</label>
+    <input type="tel" id="smsTel">
+    <label for="smsText">Message:</label>
+    <textarea id="smsText"></textarea>
+</div>
+
+<div id="paypalDiv" style="display: none;">
+    <label for="paypalEmail">PayPal Username:</label>
+    <input type="email" id="paypalEmail">
+    <label for="paypalAmount">Amount (Optional):</label>
+    <input type="number" step="any" id="paypalAmount">
+</div>
+
+
+<label for="size">Select QR Code Size:</label>
+<select id="size">
+    <option value="small">Small</option>
+    <option value="medium">Medium</option>
+    <option value="large">Large</option>
+    <option value="xl">XL</option>
+</select>
+
+
+<button onclick="generateQRCode()">Generate QR Code</button>
+
+<div id="qrcode"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.js" integrity="sha512-6WOG76AXc8rlgtGYLGhDg7lIzZG2Cc+VrSamvgpeBYgxauGuoMua6uKll4OsZ0JvVSt12lRX/9uCmXzkt3/wfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="script.js"></script>
+<div class="support">
+    Enjoyed the tool? Consider <a href="https://www.buymeacoffee.com/dewgenenny" target="_blank">buying me a coffee ☕</a> to show your support!
+</div>
+</body>
+</html>
